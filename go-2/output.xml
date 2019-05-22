@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+	<testsuite tests="6" failures="0" time="2.634" name="command-line-arguments">
+		<properties>
+			<property name="go.version" value="go1.12.4"></property>
+		</properties>
+		<testcase classname="command-line-arguments" name="TestSubmitQ1" time="0.440"></testcase>
+		<testcase classname="command-line-arguments" name="TestSubmitQ2" time="0.390"></testcase>
+		<testcase classname="command-line-arguments" name="TestSubmitQ3" time="0.380"></testcase>
+		<testcase classname="command-line-arguments" name="TestSubmitQ4" time="0.520"></testcase>
+		<testcase classname="command-line-arguments" name="TestSubmitQ5" time="0.490"></testcase>
+		<testcase classname="command-line-arguments" name="TestSubmitQ6" time="0.400"></testcase>
+	</testsuite>
+</testsuites>
