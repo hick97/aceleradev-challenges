@@ -4,7 +4,7 @@
 ## About program:
 ### <a href="https://www.codenation.dev/">https://www.codenation.dev/</a>
 
-### AceleraDev Brasil is an online acceleration program for developers created to boost potential Brazilian talent. Being 100% free and remote, this program empowers people who can compose the development teams of the leading technology companies in Brazil!
+AceleraDev Brasil is an online acceleration program for developers created to boost potential Brazilian talent. Being 100% free and remote, this program empowers people who can compose the development teams of the leading technology companies in Brazil!
 
 ## Challenges:
 ### <a href="https://github.com/hick97/aceleradev-challenges/blob/master/go-0/README.md">
