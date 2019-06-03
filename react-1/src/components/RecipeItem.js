@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 const RecipeItem = ({
   thumbnail,
@@ -23,5 +24,13 @@ const RecipeItem = ({
     </div>
   </div>
 );
+
+RecipeItem.propTypes = {
+  thumbnail: PropTypes.string,
+  title: PropTypes.string,
+  ingredients: PropTypes.string,
+  id: PropTypes.number,
+  linkToRecipePage: PropTypes.func
+};
 
 export default RecipeItem;

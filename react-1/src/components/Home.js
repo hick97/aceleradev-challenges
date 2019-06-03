@@ -18,6 +18,7 @@ const Home = ({ recipes = [], searchString = "", linkToRecipePage }) => (
 );
 
 Home.propTypes = {
+  linkToRecipePage: PropTypes.func,
   searchString: PropTypes.string,
   recipes: PropTypes.array
 };
