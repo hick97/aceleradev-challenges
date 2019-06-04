@@ -8,9 +8,7 @@ const Home = ({ recipes = [], searchString = "", linkToRecipePage }) => (
       <RecipeItem
         key={index}
         id={index}
-        title={r.title}
-        thumbnail={r.thumbnail}
-        ingredients={r.ingredients}
+        item={r}
         linkToRecipePage={linkToRecipePage}
       />
     ))}

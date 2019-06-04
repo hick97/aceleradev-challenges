@@ -86,7 +86,6 @@ class App extends Component {
             exact={true}
             component={props => (
               <Home
-                {...props}
                 searchString={this.state.searchString}
                 recipes={this.state.recipes}
                 linkToRecipePage={this.handleLinkToRecipePage}
@@ -99,7 +98,6 @@ class App extends Component {
             exact={true}
             component={props => (
               <Home
-                {...props}
                 searchString={this.state.searchString}
                 recipes={this.state.recipes}
                 linkToRecipePage={this.handleLinkToRecipePage}
@@ -110,9 +108,7 @@ class App extends Component {
             path="/recipe/:recipe"
             name="recipe"
             exact={true}
-            render={props => (
-              <RecipePage {...props} recipe={this.state.recipe} />
-            )}
+            component={props => <RecipePage recipe={this.state.recipe} />}
           />
         </div>
       </div>
