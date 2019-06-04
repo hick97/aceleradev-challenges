@@ -23,8 +23,11 @@ class App extends Component {
         .toLowerCase();
       await this.setState({
         recipes: initialRecipes.filter(item => {
-          let { title } = item;
-          return title.toLowerCase().search(keySearch) !== -1;
+          let { title, ingredients } = item;
+          return (
+            title.toLowerCase().search(keySearch) !== -1 ||
+            ingredients.toLowerCase().search(keySearch) !== -1
+          );
         }),
         searchString: keySearch
       });
@@ -38,27 +41,24 @@ class App extends Component {
     }
   }
 
-  handleInputChange = e => {
+  handleInputChange = async e => {
     const initialRecipes = recipes.results;
-    this.setState(
-      {
-        searchString: e.target.value,
-        recipe: {},
-        recipes: initialRecipes.filter(item => {
-          let { title } = item;
-          return (
-            title.toLowerCase().search(e.target.value.toLowerCase()) !== -1
-          );
-        })
-      },
-      () => {
-        if (this.state.recipes.length === 0) {
-          this.props.history.push(`/recipe/inexistent`);
-        } else {
-          this.props.history.push(`/${this.state.searchString}`);
-        }
-      }
-    );
+    await this.setState({
+      searchString: e.target.value,
+      recipe: {},
+      recipes: initialRecipes.filter(item => {
+        let { title, ingredients } = item;
+        return (
+          title.toLowerCase().search(e.target.value.toLowerCase()) !== -1 ||
+          ingredients.toLowerCase().search(e.target.value.toLowerCase()) !== -1
+        );
+      })
+    });
+    if (this.state.recipes.length === 0) {
+      this.props.history.push(`/recipe/inexistent`);
+    } else {
+      this.props.history.push(`/${this.state.searchString}`);
+    }
   };
   handleLinkToRecipePage = async (title, id) => {
     const t = await slugify(title);
