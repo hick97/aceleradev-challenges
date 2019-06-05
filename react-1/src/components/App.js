@@ -12,64 +12,84 @@ class App extends Component {
     recipes: [],
     recipe: {}
   };
-  async componentDidMount() {
-    const { pathname } = this.props.location;
 
-    if (pathname !== "/") {
-      const initialRecipes = recipes.results;
+  componentDidMount() {
+    const { pathname } = this.props.history.location;
+
+    if (pathname.indexOf("/recipe/") >= 0) {
+      const t = pathname.replace("/recipe/", "");
+      const result = this.handleLinkToRecipePage(t);
+
+      this.setState({
+        recipe: result
+      });
+    } else if (pathname !== "/") {
       const keySearch = pathname
         .match(/[a-zA-Z]+/g)
         .join(" ")
         .toLowerCase();
-      await this.setState({
-        recipes: initialRecipes.filter(item => {
-          let { title, ingredients } = item;
-          return (
-            title.toLowerCase().search(keySearch) !== -1 ||
-            ingredients.toLowerCase().search(keySearch) !== -1
-          );
-        }),
+
+      let rec = this.filterRecipes(keySearch);
+      this.setState({
+        recipes: rec,
         searchString: keySearch
       });
-      if (this.state.recipes.length === 0) {
-        this.props.history.push(`/recipe/inexistent`);
-      }
     } else {
       this.setState({
         recipes: recipes.results
       });
     }
   }
+  componentWillReceiveProps() {
+    const { pathname } = this.props.history.location;
 
-  handleInputChange = async e => {
+    if (pathname.indexOf("/recipe/") >= 0) {
+      const t = pathname.replace("/recipe/", "");
+      const result = this.handleLinkToRecipePage(t);
+
+      this.setState({
+        recipe: result
+      });
+    }
+  }
+  filterRecipes = keySearch => {
     const initialRecipes = recipes.results;
+    const ks = keySearch.toLowerCase();
+
+    let result = initialRecipes.filter(item => {
+      let { title, ingredients } = item;
+      return (
+        title.toLowerCase().search(ks) !== -1 ||
+        ingredients.toLowerCase().search(ks) !== -1
+      );
+    });
+
+    return result;
+  };
+
+  handleInputChange = async keySearch => {
+    this.props.history.push(`/${keySearch}`);
+    let rec = this.filterRecipes(keySearch);
     await this.setState({
-      searchString: e.target.value,
+      searchString: keySearch,
       recipe: {},
-      recipes: initialRecipes.filter(item => {
-        let { title, ingredients } = item;
-        return (
-          title.toLowerCase().search(e.target.value.toLowerCase()) !== -1 ||
-          ingredients.toLowerCase().search(e.target.value.toLowerCase()) !== -1
-        );
-      })
+      recipes: rec
     });
     if (this.state.recipes.length === 0) {
       this.props.history.push(`/recipe/inexistent`);
-    } else {
-      this.props.history.push(`/${this.state.searchString}`);
     }
   };
-  handleLinkToRecipePage = async (title, id) => {
-    const t = await slugify(title);
-    const r = this.state.recipes[id];
 
-    this.setState({
-      recipe: r
+  handleLinkToRecipePage = keySearch => {
+    const initialRecipes = recipes.results;
+    let result = initialRecipes.filter(item => {
+      let { title } = item;
+      return slugify(title.toLowerCase()).search(keySearch) !== -1;
     });
 
-    this.props.history.push(`recipe/${t}`);
+    return result[0];
   };
+
   render() {
     return (
       <div className="App">
@@ -88,26 +108,21 @@ class App extends Component {
               <Home
                 searchString={this.state.searchString}
                 recipes={this.state.recipes}
-                linkToRecipePage={this.handleLinkToRecipePage}
               />
             )}
           />
           <Route
             path="/:searchString"
-            name="searchString"
-            exact={true}
+            exact
             component={props => (
               <Home
                 searchString={this.state.searchString}
                 recipes={this.state.recipes}
-                linkToRecipePage={this.handleLinkToRecipePage}
               />
             )}
           />
           <Route
             path="/recipe/:recipe"
-            name="recipe"
-            exact={true}
             component={props => <RecipePage recipe={this.state.recipe} />}
           />
         </div>

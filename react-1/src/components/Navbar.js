@@ -10,7 +10,7 @@ const Navbar = ({ searchString, inputChange }) => (
 
     <div className="form-group justify-content-center row col-10 my-2">
       <input
-        onChange={inputChange}
+        onChange={e => inputChange(e.target.value)}
         value={searchString}
         // TODO: onChange deve atualizar a URL
         className="form-control col-9 mr-2"

@@ -2,9 +2,9 @@ import React, { Fragment } from "react";
 import PropTypes from "prop-types";
 
 // TODO: Você deve verificar se a receita existe
-const RecipePage = ({ recipe = {} }) => (
+const RecipePage = ({ recipe }) => (
   <div>
-    {Object.keys(recipe).length !== 0 ? (
+    {recipe ? (
       <Fragment>
         <img className="card-img-top img-fluid" src={recipe.thumbnail} alt="" />
         <div className="card-body">
