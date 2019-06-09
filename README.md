@@ -21,3 +21,7 @@ Processing data from FIFA 2017 players using Go</a><br>
 ### React:
 ### <a href="https://github.com/hick97/aceleradev-challenges/blob/master/react-1/README.md">
 Creating routes with React</a><br>
+### <a href="https://github.com/hick97/aceleradev-challenges/blob/master/react-2/README.md">
+Login and Comment creation</a><br>
+
+
