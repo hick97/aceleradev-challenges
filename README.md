@@ -27,7 +27,7 @@ Login and Comment creation</a><br>
 Integrating React with External APIs</a><br>
 
 ### Final Challenge:
-### <a href="https://github.com/hick97/squad-4-aceleradev-fs-online-1/blob/master/backend/README.md">
+### <a href="https://github.com/codenation-dev/squad-4-aceleradev-fs-online-1">
 Customer management - Uati Bank</a><br>
 
 
